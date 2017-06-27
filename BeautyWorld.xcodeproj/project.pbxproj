@@ -30,10 +30,44 @@
 		C4E87DD91EA6B40F002117D6 /* VirtualObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E87DD81EA6B40F002117D6 /* VirtualObject.swift */; };
 		C4FBC02B1EC6438B003F7864 /* ARCameraTrackingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FBC02A1EC6438B003F7864 /* ARCameraTrackingState.swift */; };
 		FE078BE21F024982007BCF8A /* ImageToVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE078BE11F024982007BCF8A /* ImageToVideo.swift */; };
+		FE078BE71F028174007BCF8A /* Sample.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FE078BE41F026D23007BCF8A /* Sample.mp3 */; };
 		FE71DA441F015A230040C696 /* Bullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE71DA431F015A230040C696 /* Bullet.swift */; };
 		FE71DA461F015A2E0040C696 /* Balloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE71DA451F015A2E0040C696 /* Balloon.swift */; };
 		FE7323D61F01CEA60018A77D /* MusicTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7323D51F01CEA60018A77D /* MusicTree.swift */; };
+		FECA04771F02C337007AD8E8 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE078BED1F029A9E007BCF8A /* AudioKit.framework */; };
+		FECA04781F02C337007AD8E8 /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FE078BED1F029A9E007BCF8A /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FE078BEC1F029A9E007BCF8A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FE078BE81F029A9C007BCF8A /* AudioKit For iOS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C42F35001C057E03000E937C;
+			remoteInfo = AudioKit;
+		};
+		FECA04791F02C337007AD8E8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FE078BE81F029A9C007BCF8A /* AudioKit For iOS.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C42F34FF1C057E03000E937C;
+			remoteInfo = AudioKit;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FECA047B1F02C337007AD8E8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				FECA04781F02C337007AD8E8 /* AudioKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		11063F3B1EBE651B0033EE6D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -64,6 +98,8 @@
 		C4FBC02A1EC6438B003F7864 /* ARCameraTrackingState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARCameraTrackingState.swift; sourceTree = "<group>"; };
 		C7F76951F8992F473202F831 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		FE078BE11F024982007BCF8A /* ImageToVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageToVideo.swift; sourceTree = "<group>"; };
+		FE078BE41F026D23007BCF8A /* Sample.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Sample.mp3; sourceTree = "<group>"; };
+		FE078BE81F029A9C007BCF8A /* AudioKit For iOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "AudioKit For iOS.xcodeproj"; path = "../../AudioKit-3.5/AudioKit/iOS/AudioKit For iOS.xcodeproj"; sourceTree = "<group>"; };
 		FE71DA431F015A230040C696 /* Bullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bullet.swift; sourceTree = "<group>"; };
 		FE71DA451F015A2E0040C696 /* Balloon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Balloon.swift; sourceTree = "<group>"; };
 		FE7323D51F01CEA60018A77D /* MusicTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicTree.swift; sourceTree = "<group>"; };
@@ -74,6 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FECA04771F02C337007AD8E8 /* AudioKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +132,7 @@
 		3929C47F1E89EC2C00E00B60 = {
 			isa = PBXGroup;
 			children = (
+				FE078BE81F029A9C007BCF8A /* AudioKit For iOS.xcodeproj */,
 				11063F3B1EBE651B0033EE6D /* README.md */,
 				3929C48A1E89EC2C00E00B60 /* BeautyWorld */,
 				3929C4891E89EC2C00E00B60 /* Products */,
@@ -164,6 +202,22 @@
 			name = Configuration;
 			sourceTree = "<group>";
 		};
+		FE078BE31F026D07007BCF8A /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				FE078BE41F026D23007BCF8A /* Sample.mp3 */,
+			);
+			path = Music;
+			sourceTree = "<group>";
+		};
+		FE078BE91F029A9C007BCF8A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FE078BED1F029A9E007BCF8A /* AudioKit.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		FE71DA401F0155F30040C696 /* BalloonShooting */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +231,7 @@
 		FE7323D41F01CE630018A77D /* MusicTree */ = {
 			isa = PBXGroup;
 			children = (
+				FE078BE31F026D07007BCF8A /* Music */,
 				FE7323D51F01CEA60018A77D /* MusicTree.swift */,
 			);
 			path = MusicTree;
@@ -192,10 +247,12 @@
 				3929C4841E89EC2C00E00B60 /* Sources */,
 				3929C4851E89EC2C00E00B60 /* Frameworks */,
 				3929C4861E89EC2C00E00B60 /* Resources */,
+				FECA047B1F02C337007AD8E8 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				FECA047A1F02C337007AD8E8 /* PBXTargetDependency */,
 			);
 			name = BeautyWorld;
 			productName = ARKitExample;
@@ -231,6 +288,12 @@
 			mainGroup = 3929C47F1E89EC2C00E00B60;
 			productRefGroup = 3929C4891E89EC2C00E00B60 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = FE078BE91F029A9C007BCF8A /* Products */;
+					ProjectRef = FE078BE81F029A9C007BCF8A /* AudioKit For iOS.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				3929C4871E89EC2C00E00B60 /* BeautyWorld */,
@@ -238,11 +301,22 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		FE078BED1F029A9E007BCF8A /* AudioKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AudioKit.framework;
+			remoteRef = FE078BEC1F029A9E007BCF8A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		3929C4861E89EC2C00E00B60 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE078BE71F028174007BCF8A /* Sample.mp3 in Resources */,
 				3929C49F1E89EE4400E00B60 /* Models.scnassets in Resources */,
 				39D8DC1B1E8ADAE600386B05 /* LaunchScreen.storyboard in Resources */,
 				3929C4931E89EC2C00E00B60 /* Assets.xcassets in Resources */,
@@ -283,6 +357,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FECA047A1F02C337007AD8E8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AudioKit;
+			targetProxy = FECA04791F02C337007AD8E8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3929C48F1E89EC2C00E00B60 /* Main.storyboard */ = {
@@ -397,6 +479,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 16DA3C59CAE7D97A9FDD9FA0 /* SampleCode.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -416,6 +499,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 16DA3C59CAE7D97A9FDD9FA0 /* SampleCode.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

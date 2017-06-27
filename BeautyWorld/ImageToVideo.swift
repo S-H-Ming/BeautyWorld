@@ -70,10 +70,6 @@ class ImageAnimator {
     }
     
     init(renderSettings: RenderSettings, recordImageList: [UIImage]) {
-        let date = Date()
-        let calendar = Calendar.current
-        let hour = calendar.component(.hour, from: date)
-        let minutes = calendar.component(.minute, from: date)
         
         settings = renderSettings
         videoWriter = VideoWriter(renderSettings: settings)

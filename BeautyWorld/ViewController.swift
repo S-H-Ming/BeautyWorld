@@ -7,9 +7,11 @@ Main view controller for the AR experience.
 
 import ARKit
 import Foundation
+import AVFoundation
 import SceneKit
 import UIKit
 import Photos
+import AudioKit
 
 class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentationControllerDelegate, VirtualObjectSelectionViewControllerDelegate {
 	
@@ -94,16 +96,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
 		}
 		sceneView.scene.lightingEnvironment.intensity = intensity
 	}
-	
     // MARK: - ARSCNViewDelegate
 	
 	func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
 		refreshFeaturePoints()
-		
 		DispatchQueue.main.async {
 			self.updateFocusSquare()
 			self.hitTestVisualization?.render()
-			
 			// If light estimation is enabled, update the intensity of the model's lights and the environment map
 			if let lightEstimate = self.session.currentFrame?.lightEstimate {
 				self.enableEnvironmentMapWithIntensity(lightEstimate.ambientIntensity / 40)
@@ -119,31 +118,29 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
 				self.addPlane(node: node, anchor: planeAnchor)
                 self.checkIfObjectShouldMoveOntoPlane(anchor: planeAnchor)
                 
-                // Generate MusicTree()
-                let MusicTreeNode = MusicTree()
-                
                 // SCNPlanes are vertically oriented in their local coordinate space.
-                MusicTreeNode.position = SCNVector3Make(planeAnchor.center.x, 0, planeAnchor.center.z)
                 
-                // Rotate it to match the horizontal orientation of the ARPlaneAnchor.
-                //MusicTreeNode.transform = SCNMatrix4MakeRotation(-Float.pi / 2, 1, 0, 0)
+                //self.MusicTreeNode = MusicTree()
+                //self.MusicTreeNode!.position = SCNVector3Make(planeAnchor.center.x, 0, planeAnchor.center.z)
                 
                 // ARKit owns the node corresponding to the anchor, so make the plane a child node.
-                //node.addChildNode(MusicTreeNode)
-                
-                // test
+                //node.addChildNode(self.MusicTreeNode)
+                //node.insertChildNode(self.MusicTreeNode!, at: 0)
+                //print(self.MusicTreeNode!.position)
+                /* test
                 let subScene = SCNScene(named: "Models.scnassets/test/cube.dae")!
                 let childNodes = subScene.rootNode.childNodes
                 for child in childNodes {
                     child.scale = SCNVector3Make(0.1, 0.1, 0.1);
                     node.addChildNode(child)
                 }
-                //
+                */
             }
         }
     }
 	
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+        print(node.position)
         DispatchQueue.main.async {
             if let planeAnchor = anchor as? ARPlaneAnchor {
                 self.updatePlane(anchor: planeAnchor)
@@ -1010,11 +1007,31 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
     
     //  -------------- Music Tree --------------
     
-    var showMusicTree: Bool = false
-    var musicTree: MusicTree?
     
+    var showMusicTree: Bool = false
+    var MusicTreeNode: MusicTree?
+    
+    @IBOutlet weak var musicTreeButton: UIButton!
+    
+    @IBAction func clickMusicTreeButton(_ sender: Any) {
+        guard musicTreeButton.isEnabled else {
+            return
+        }
+        if showMusicTree {
+            MusicTreeNode!.stop()
+            showMusicTree = false
+        }
+        else{
+            if let node = MusicTreeNode{
+                node.play()
+                showMusicTree = true
+            }
+        }
+    }
     
 }
+
+
 
 struct CollisionCategory: OptionSet {
     let rawValue: Int

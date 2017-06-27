@@ -109,6 +109,10 @@ extension SCNNode {
 			child.renderOnTop()
 		}
 	}
+    
+    func treeRefresh(){
+        // Implemenet in MusicTree
+    }
 }
 
 // MARK: - SCNVector3 extensions
