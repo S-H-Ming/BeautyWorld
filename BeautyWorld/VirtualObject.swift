@@ -58,7 +58,6 @@ class VirtualObject: SCNNode {
 		for child in self.childNodes {
 			child.removeFromParentNode()
 		}
-		
 		modelLoaded = false
 	}
 	

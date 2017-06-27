@@ -27,9 +27,4 @@ class Balloon: SCNNode {
 }
 
 
-struct CollisionCategory: OptionSet {
-    let rawValue: Int
-    
-    static let bullets  = CollisionCategory(rawValue: 1 << 0) // 00...01
-    static let balloon = CollisionCategory(rawValue: 1 << 1) // 00..10
-}
+

@@ -17,7 +17,7 @@ class Candle: VirtualObject, ReactsToScale {
 	required init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
-	
+    
 	func reactToScale() {
 		// Update the size of the flame
 		let flameNode = self.childNode(withName: "flame", recursively: true)

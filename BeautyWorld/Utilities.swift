@@ -11,12 +11,15 @@ import ARKit
 // - MARK: UIImage extensions
 
 extension UIImage {
+    
 	func inverted() -> UIImage? {
         guard let ciImage = CIImage(image: self) else {
             return nil
         }
         return UIImage(ciImage: ciImage.applyingFilter("CIColorInvert", withInputParameters: nil))
     }
+    
+    
 	
 	static func composeButtonImage(from thumbImage: UIImage, alpha: CGFloat = 1.0) -> UIImage {
 		let maskImage = #imageLiteral(resourceName: "buttonring")

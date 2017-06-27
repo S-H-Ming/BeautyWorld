@@ -25,8 +25,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
 		updateSettings()
 		resetVirtualObject()
         
-        self.addNewBalloon();
-        
+        self.addNewBalloon()
         
     }
 
@@ -70,7 +69,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
 		
 		sceneView.preferredFramesPerSecond = 60
 		sceneView.contentScaleFactor = 1.3
-		sceneView.showsStatistics = true
+		//sceneView.showsStatistics = true
         
         //sceneView.scene.physicsWorld.contactDelegate = self as! SCNPhysicsContactDelegate
 		enableEnvironmentMapWithIntensity(25.0)
@@ -119,6 +118,27 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
             if let planeAnchor = anchor as? ARPlaneAnchor {
 				self.addPlane(node: node, anchor: planeAnchor)
                 self.checkIfObjectShouldMoveOntoPlane(anchor: planeAnchor)
+                
+                // Generate MusicTree()
+                let MusicTreeNode = MusicTree()
+                
+                // SCNPlanes are vertically oriented in their local coordinate space.
+                MusicTreeNode.position = SCNVector3Make(planeAnchor.center.x, 0, planeAnchor.center.z)
+                
+                // Rotate it to match the horizontal orientation of the ARPlaneAnchor.
+                //MusicTreeNode.transform = SCNMatrix4MakeRotation(-Float.pi / 2, 1, 0, 0)
+                
+                // ARKit owns the node corresponding to the anchor, so make the plane a child node.
+                //node.addChildNode(MusicTreeNode)
+                
+                // test
+                let subScene = SCNScene(named: "Models.scnassets/test/cube.dae")!
+                let childNodes = subScene.rootNode.childNodes
+                for child in childNodes {
+                    child.scale = SCNVector3Make(0.1, 0.1, 0.1);
+                    node.addChildNode(child)
+                }
+                //
             }
         }
     }
@@ -737,7 +757,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
 		guard restartExperienceButtonIsEnabled, !isLoadingObject else {
 			return
 		}
-		
 		DispatchQueue.main.async {
 			self.restartExperienceButtonIsEnabled = false
 			
@@ -767,6 +786,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
 		}
 		
 		let takeScreenshotBlock = {
+            
 			UIImageWriteToSavedPhotosAlbum(self.sceneView.snapshot(), nil, nil, nil)
 			DispatchQueue.main.async {
 				// Briefly flash the screen.
@@ -796,8 +816,79 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
 			})
 		}
 	}
-		
-	// MARK: - Settings
+    
+    // MARK: - Recording
+    
+    var recordTimer:Timer!
+    //var recordImageList: Array<UIImage> = Array()
+    var recordImageList: [UIImage] = []
+    
+	@IBOutlet weak var RecordButton: UIButton!
+    var isRecordStart: Bool = false;
+    @IBAction func Recording(_ sender: Any) {
+        guard RecordButton.isEnabled else {
+            return
+        }
+        let takeReaordingBlock = {
+            UIImageWriteToSavedPhotosAlbum(self.sceneView.snapshot(), nil, nil, nil)
+            
+        }
+        
+        switch PHPhotoLibrary.authorizationStatus() {
+        case .authorized:
+            if isRecordStart{
+                recordTimer.invalidate()
+                imageListToVideo()
+                isRecordStart = false
+                RecordButton.backgroundColor = UIColor.lightText
+            }
+            else{
+                recordTimer = Timer.scheduledTimer(timeInterval: 0.05,target:self,selector:#selector(ViewController.addUIimageIntoList),userInfo:nil,repeats:true)
+                isRecordStart = true
+                RecordButton.backgroundColor = UIColor.red
+                
+            }
+            takeReaordingBlock()
+        case .restricted, .denied:
+            let title = "Photos access denied"
+            let message = "Please enable Photos access for this application in Settings > Privacy to allow saving screenshots."
+            textManager.showAlert(title: title, message: message)
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization({ (authorizationStatus) in
+                if authorizationStatus == .authorized {
+                    takeReaordingBlock()
+                }
+            })
+        }
+    }
+    
+    func addUIimageIntoList(){
+        var img: UIImage = self.sceneView.snapshot()
+        img = resizeImage(image: img,newWidth: 720)!
+        recordImageList.append(img)
+    }
+    
+    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage? {
+        
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
+        image.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
+    }
+    
+    func imageListToVideo(){
+        
+        let settings = RenderSettings()
+        let imageAnimator = ImageAnimator(renderSettings: settings, recordImageList: recordImageList)
+        imageAnimator.render() {
+            print("yes")
+        }
+    }
+    
+    // MARK: - Settings
 	
 	@IBOutlet weak var settingsButton: UIButton!
 	
@@ -869,6 +960,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
 	}
     
     //  --------------Balloon Shooting--------------
+    
     @IBAction func didTapScreen(_ sender: Any) {
         // fire bullet
         let bulletsNode = Bullet()
@@ -905,7 +997,21 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
         self.addNewBalloon()
         
     }
+    
     func floatBetween(_ first: Float,  and second: Float) -> Float {
         return (Float(arc4random()) / Float(UInt32.max)) * (first - second) + second
     }
+    
+    //  -------------- Music Tree --------------
+    
+    var musicTree: MusicTree?
+    
+    
+}
+
+struct CollisionCategory: OptionSet {
+    let rawValue: Int
+    
+    static let bullets  = CollisionCategory(rawValue: 1 << 0) // 00...01
+    static let balloon = CollisionCategory(rawValue: 1 << 1) // 00..10
 }
