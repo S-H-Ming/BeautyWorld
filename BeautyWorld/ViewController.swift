@@ -884,7 +884,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
         let settings = RenderSettings()
         let imageAnimator = ImageAnimator(renderSettings: settings, recordImageList: recordImageList)
         imageAnimator.render() {
-            print("yes")
+            let alertView = UIAlertController(title: "螢幕錄影", message: "已成功輸出AR影像到\"照片\"", preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default, handler: { (alert) in
+                
+            })
+            alertView.addAction(action)
+            self.present(alertView, animated: true, completion: nil)
+            
         }
     }
     
@@ -1004,6 +1010,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
     
     //  -------------- Music Tree --------------
     
+    var showMusicTree: Bool = false
     var musicTree: MusicTree?
     
     
