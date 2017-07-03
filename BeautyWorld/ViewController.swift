@@ -27,7 +27,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
 		updateSettings()
 		resetVirtualObject()
         
-        self.addNewBalloon()
+        // set Recording button long press
+        
+        let longPress = UILongPressGestureRecognizer(
+            target: self,
+            action: #selector(ViewController.CameraBtnLongPress(recognizer:))
+        )
+        self.view.addGestureRecognizer(longPress)
+        
+        //self.addNewBalloon()
         
     }
 
@@ -73,7 +81,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
 		sceneView.contentScaleFactor = 1.3
 		//sceneView.showsStatistics = true
         
-        //sceneView.scene.physicsWorld.contactDelegate = self as! SCNPhysicsContactDelegate
+        //sceneView.scene.physicsWorld.contactDelegate = (self as! SCNPhysicsContactDelegate)
 		enableEnvironmentMapWithIntensity(25.0)
 		
 		DispatchQueue.main.async {
@@ -127,20 +135,22 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
                 //node.addChildNode(self.MusicTreeNode)
                 //node.insertChildNode(self.MusicTreeNode!, at: 0)
                 //print(self.MusicTreeNode!.position)
-                /* test
-                let subScene = SCNScene(named: "Models.scnassets/test/cube.dae")!
-                let childNodes = subScene.rootNode.childNodes
-                for child in childNodes {
-                    child.scale = SCNVector3Make(0.1, 0.1, 0.1);
-                    node.addChildNode(child)
+                if self.showLoadModel{
+                    let subScene = SCNScene(named: "Models.scnassets/test/cube.dae")!
+                    let childNodes = subScene.rootNode.childNodes
+                    for child in childNodes {
+                        child.scale = SCNVector3Make(0.1, 0.1, 0.1);
+                        child.position = (SCNVector3Make(planeAnchor.center.x, 0, planeAnchor.center.z))
+                        node.addChildNode(child)
+                    }
                 }
-                */
+                
+                
             }
         }
     }
 	
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-        print(node.position)
         DispatchQueue.main.async {
             if let planeAnchor = anchor as? ARPlaneAnchor {
                 self.updatePlane(anchor: planeAnchor)
@@ -820,12 +830,18 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
     //var recordImageList: Array<UIImage> = Array()
     var recordImageList: [UIImage] = []
     
-	@IBOutlet weak var RecordButton: UIButton!
     var isRecordStart: Bool = false;
-    @IBAction func Recording(_ sender: Any) {
-        guard RecordButton.isEnabled else {
-            return
+    
+    func CameraBtnLongPress(recognizer:UILongPressGestureRecognizer) {
+        
+        if recognizer.state == .began {
+            startRecording()
         }
+        
+    }
+    
+    func startRecording() {
+        
         let takeReaordingBlock = {
             UIImageWriteToSavedPhotosAlbum(self.sceneView.snapshot(), nil, nil, nil)
             
@@ -837,13 +853,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
                 recordTimer.invalidate()
                 imageListToVideo()
                 isRecordStart = false
-                RecordButton.backgroundColor = UIColor.lightText
+                self.screenshotButton.setImage(#imageLiteral(resourceName: "shutter"), for: [])
             }
             else{
                 recordTimer = Timer.scheduledTimer(timeInterval: 0.05,target:self,selector:#selector(ViewController.addUIimageIntoList),userInfo:nil,repeats:true)
                 isRecordStart = true
-                RecordButton.backgroundColor = UIColor.red
-                
+                self.screenshotButton.setImage(#imageLiteral(resourceName: "shutterRecord"), for: [])
             }
             takeReaordingBlock()
         case .restricted, .denied:
@@ -1005,6 +1020,26 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
         return (Float(arc4random()) / Float(UInt32.max)) * (first - second) + second
     }
     
+    //  -------------- Load Model --------------
+    
+    var showLoadModel: Bool = false
+    
+    @IBOutlet weak var CubeButton: UIButton!
+    @IBAction func clickCubeButton(_ sender: Any) {
+        guard CubeButton.isEnabled else {
+            return
+        }
+        if showLoadModel{
+            CubeButton.backgroundColor = UIColor.lightText
+            showLoadModel = false
+        }
+        else{
+            CubeButton.backgroundColor = UIColor.blue
+            showLoadModel = true
+        }
+    }
+    
+    
     //  -------------- Music Tree --------------
     
     
@@ -1030,8 +1065,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
     }
     
 }
-
-
 
 struct CollisionCategory: OptionSet {
     let rawValue: Int
