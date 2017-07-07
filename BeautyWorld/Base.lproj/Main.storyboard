@@ -176,18 +176,6 @@
                                 </view>
                                 <blurEffect style="light"/>
                             </visualEffectView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Z9-xC-svG">
-                                <rect key="frame" x="219" y="604" width="84" height="48"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="DO7-4n-TiR"/>
-                                    <constraint firstAttribute="width" constant="84" id="NyC-hx-NCM"/>
-                                </constraints>
-                                <state key="normal" title="MusicTree"/>
-                                <connections>
-                                    <action selector="clickMusicTreeButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="uE7-ko-vG0"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CsG-Ic-DOt">
                                 <rect key="frame" x="314" y="545" width="46" height="30"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
@@ -200,6 +188,78 @@
                                     <action selector="clickCubeButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="qY8-JS-4yJ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DOw-3W-Cie" userLabel="Fantacy Button">
+                                <rect key="frame" x="221.5" y="604" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="Byx-5l-bQQ"/>
+                                    <constraint firstAttribute="height" constant="48" id="vBc-WY-hmA"/>
+                                </constraints>
+                                <state key="normal" image="add"/>
+                                <connections>
+                                    <action selector="showFantacy:" destination="BV1-FR-VrT" eventType="touchUpInside" id="3r1-4y-sGX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d2I-px-oGz" userLabel="Else Button">
+                                <rect key="frame" x="105.5" y="604" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="MK3-RD-0dT"/>
+                                    <constraint firstAttribute="height" constant="48" id="pzm-Yb-TCq"/>
+                                </constraints>
+                                <state key="normal" image="add"/>
+                            </button>
+                            <stackView hidden="YES" opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="PNy-dj-udc" userLabel="Fantacy View" customClass="UISky">
+                                <rect key="frame" x="170" y="391" width="150" height="200"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ibu-bo-aMK" userLabel="BallonShooting Button">
+                                        <rect key="frame" x="0.0" y="0.0" width="150" height="50"/>
+                                        <color key="backgroundColor" red="0.83520546920520911" green="0.84949729158855691" blue="0.86779807824544952" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="1AW-Oy-Uuy"/>
+                                        </constraints>
+                                        <state key="normal" title="氣球射擊">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mxu-fR-TiW" userLabel="MusicTree Button">
+                                        <rect key="frame" x="0.0" y="50" width="150" height="50"/>
+                                        <color key="backgroundColor" red="0.83520546920520911" green="0.84949729158855691" blue="0.86779807824544952" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Y4C-cP-X3D"/>
+                                        </constraints>
+                                        <state key="normal" title="音樂樹">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="clickMusicTreeButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="TRb-qE-kb0"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s9F-Aw-dNv" userLabel="CubeFalling Button">
+                                        <rect key="frame" x="0.0" y="100" width="150" height="50"/>
+                                        <color key="backgroundColor" red="0.83520546920520911" green="0.84949729158855691" blue="0.86779807824544952" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="EVl-qJ-RzV"/>
+                                        </constraints>
+                                        <state key="normal" title="崩潰方塊">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jBP-IY-b1l" userLabel="CubeWorld Button">
+                                        <rect key="frame" x="0.0" y="150" width="150" height="50"/>
+                                        <color key="backgroundColor" red="0.83520546920520911" green="0.84949729158855691" blue="0.86779807824544952" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="zkQ-fL-NVB"/>
+                                        </constraints>
+                                        <state key="normal" title="方塊世界">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.76417320966720581" green="0.7803570032119751" blue="0.78864085674285889" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="kBb-YI-d3U"/>
+                                    <constraint firstAttribute="width" constant="150" id="oH3-KM-Ybq"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -210,7 +270,7 @@
                             <constraint firstItem="E6c-py-dvH" firstAttribute="top" secondItem="RLh-bf-1c3" secondAttribute="top" id="7gH-DS-Crg"/>
                             <constraint firstItem="E6c-py-dvH" firstAttribute="leading" secondItem="GBj-4O-Whc" secondAttribute="leading" id="8nh-ZQ-AuM"/>
                             <constraint firstItem="q5A-xD-w2H" firstAttribute="top" secondItem="CsG-Ic-DOt" secondAttribute="bottom" constant="28" id="9gv-T0-ZQ4"/>
-                            <constraint firstItem="GBj-4O-Whc" firstAttribute="bottom" secondItem="3Z9-xC-svG" secondAttribute="bottom" constant="15" id="DPd-2A-DJN"/>
+                            <constraint firstItem="DOw-3W-Cie" firstAttribute="leading" secondItem="xcf-ic-uGo" secondAttribute="trailing" constant="10" id="Bqd-c4-mPD"/>
                             <constraint firstItem="GBj-4O-Whc" firstAttribute="bottom" secondItem="qI1-of-tgS" secondAttribute="bottom" constant="15" id="EoQ-R6-wLs"/>
                             <constraint firstItem="9e0-zv-RiN" firstAttribute="top" secondItem="E6c-py-dvH" secondAttribute="top" constant="15" id="FTS-AH-WBr"/>
                             <constraint firstItem="j8v-6q-UBb" firstAttribute="trailing" secondItem="E6c-py-dvH" secondAttribute="trailing" constant="-15" id="Iz6-94-ZyB"/>
@@ -218,29 +278,36 @@
                             <constraint firstItem="q5A-xD-w2H" firstAttribute="bottom" secondItem="E6c-py-dvH" secondAttribute="bottom" id="NdC-Ig-ZW6"/>
                             <constraint firstItem="mHW-JQ-uOv" firstAttribute="bottom" secondItem="E6c-py-dvH" secondAttribute="bottom" id="Nov-Ar-ZZv"/>
                             <constraint firstItem="SPB-Sb-hjO" firstAttribute="centerX" secondItem="E6c-py-dvH" secondAttribute="centerX" id="SHv-Jn-H5B"/>
+                            <constraint firstItem="DOw-3W-Cie" firstAttribute="centerX" secondItem="PNy-dj-udc" secondAttribute="centerX" id="Sqj-Vc-cGG"/>
                             <constraint firstItem="qI1-of-tgS" firstAttribute="leading" secondItem="E6c-py-dvH" secondAttribute="leading" constant="15" id="TAE-Eo-uQj"/>
                             <constraint firstItem="SuF-Os-zmb" firstAttribute="top" secondItem="E6c-py-dvH" secondAttribute="top" id="UMK-or-VVf"/>
                             <constraint firstItem="BgI-fb-Vqi" firstAttribute="top" secondItem="GBj-4O-Whc" secondAttribute="top" constant="20" id="V7S-nn-Lcz"/>
                             <constraint firstItem="mHW-JQ-uOv" firstAttribute="leading" secondItem="E6c-py-dvH" secondAttribute="leading" id="YbV-6m-kVC"/>
+                            <constraint firstItem="SPB-Sb-hjO" firstAttribute="top" secondItem="PNy-dj-udc" secondAttribute="bottom" constant="12" id="Yv2-K6-pAA"/>
                             <constraint firstItem="xcf-ic-uGo" firstAttribute="centerX" secondItem="GBj-4O-Whc" secondAttribute="centerX" id="ZCe-ld-yQW"/>
-                            <constraint firstItem="q5A-xD-w2H" firstAttribute="leading" secondItem="3Z9-xC-svG" secondAttribute="trailing" constant="8" id="ekk-dh-I4U"/>
+                            <constraint firstItem="GBj-4O-Whc" firstAttribute="bottom" secondItem="d2I-px-oGz" secondAttribute="bottom" constant="15" id="cPG-MY-WmR"/>
+                            <constraint firstItem="xcf-ic-uGo" firstAttribute="leading" secondItem="d2I-px-oGz" secondAttribute="trailing" constant="10" id="cpr-ff-3MX"/>
                             <constraint firstItem="SPB-Sb-hjO" firstAttribute="bottom" secondItem="E6c-py-dvH" secondAttribute="bottom" id="fjf-Mj-ALG"/>
                             <constraint firstItem="9e0-zv-RiN" firstAttribute="leading" secondItem="E6c-py-dvH" secondAttribute="leading" constant="15" id="iIf-WZ-kZj"/>
                             <constraint firstItem="GBj-4O-Whc" firstAttribute="trailing" secondItem="E6c-py-dvH" secondAttribute="trailing" id="lHd-lf-g1u"/>
                             <constraint firstItem="GBj-4O-Whc" firstAttribute="bottom" secondItem="xcf-ic-uGo" secondAttribute="bottom" constant="15" id="sOL-M5-nW8"/>
                             <constraint firstItem="q5A-xD-w2H" firstAttribute="trailing" secondItem="E6c-py-dvH" secondAttribute="trailing" id="uvV-bc-TtK"/>
+                            <constraint firstItem="GBj-4O-Whc" firstAttribute="bottom" secondItem="DOw-3W-Cie" secondAttribute="bottom" constant="15" id="v66-0w-mv8"/>
                             <constraint firstItem="GBj-4O-Whc" firstAttribute="bottom" secondItem="j8v-6q-UBb" secondAttribute="bottom" constant="15" id="vm8-IH-8Qx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="GBj-4O-Whc"/>
                     </view>
                     <connections>
+                        <outlet property="CameraHitArea" destination="mHW-JQ-uOv" id="4lu-my-TrR"/>
                         <outlet property="CubeButton" destination="CsG-Ic-DOt" id="kLJ-hl-5Hd"/>
+                        <outlet property="FantacyButton" destination="DOw-3W-Cie" id="sif-sI-XxS"/>
+                        <outlet property="FantacyView" destination="PNy-dj-udc" id="lM0-eO-g68"/>
                         <outlet property="addObjectButton" destination="xcf-ic-uGo" id="uFa-W2-4Iu"/>
                         <outlet property="debugMessageLabel" destination="Cxm-GD-h1F" id="0BW-FJ-xmR"/>
                         <outlet property="featurePointCountLabel" destination="2ZI-fK-iax" id="wpJ-fJ-Kn2"/>
                         <outlet property="messageLabel" destination="Mqz-65-rAs" id="G3a-qn-5g9"/>
                         <outlet property="messagePanel" destination="9e0-zv-RiN" id="pKf-hp-Dvx"/>
-                        <outlet property="musicTreeButton" destination="3Z9-xC-svG" id="X7z-0B-w5w"/>
+                        <outlet property="musicTreeButton" destination="mxu-fR-TiW" id="aOl-Cm-FDo"/>
                         <outlet property="restartExperienceButton" destination="BgI-fb-Vqi" id="Yfh-W4-qlO"/>
                         <outlet property="sceneView" destination="E6c-py-dvH" id="Gr4-Uw-Z4A"/>
                         <outlet property="screenshotButton" destination="qI1-of-tgS" id="RLx-ag-NNP"/>

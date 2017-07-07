@@ -24,6 +24,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
         setupDebug()
         setupUIControls()
 		setupFocusSquare()
+        setupTable()
 		updateSettings()
 		resetVirtualObject()
         
@@ -79,7 +80,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
 		
 		sceneView.preferredFramesPerSecond = 60
 		sceneView.contentScaleFactor = 1.3
-		//sceneView.showsStatistics = true
         
         //sceneView.scene.physicsWorld.contactDelegate = (self as! SCNPhysicsContactDelegate)
 		enableEnvironmentMapWithIntensity(25.0)
@@ -126,21 +126,19 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
 				self.addPlane(node: node, anchor: planeAnchor)
                 self.checkIfObjectShouldMoveOntoPlane(anchor: planeAnchor)
                 
-                // SCNPlanes are vertically oriented in their local coordinate space.
-                
-                //self.MusicTreeNode = MusicTree()
+                // SCNPlanes are vertically oriented in their local coordinate space
                 //self.MusicTreeNode!.position = SCNVector3Make(planeAnchor.center.x, 0, planeAnchor.center.z)
-                
+                self.lastPlaneNode = node
+                self.lastPlaneAnchor = planeAnchor
                 // ARKit owns the node corresponding to the anchor, so make the plane a child node.
-                //node.addChildNode(self.MusicTreeNode)
                 //node.insertChildNode(self.MusicTreeNode!, at: 0)
                 //print(self.MusicTreeNode!.position)
                 if self.showLoadModel{
                     let subScene = SCNScene(named: "Models.scnassets/test/cube.dae")!
                     let childNodes = subScene.rootNode.childNodes
                     for child in childNodes {
-                        child.scale = SCNVector3Make(0.1, 0.1, 0.1);
-                        child.position = (SCNVector3Make(planeAnchor.center.x, 0, planeAnchor.center.z))
+                        child.scale = SCNVector3Make(0.01, 0.01, 0.01);
+                        child.position = SCNVector3Make(planeAnchor.center.x, 0, planeAnchor.center.z)
                         node.addChildNode(child)
                     }
                 }
@@ -597,7 +595,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
 	}
 	
 	func virtualObjectSelectionViewControllerDidDeselectObject(_: VirtualObjectSelectionViewController) {
-		resetVirtualObject()
 	}
 	
     // MARK: - Planes
@@ -610,10 +607,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
 		textManager.showDebugMessage("NEW SURFACE DETECTED AT \(pos.friendlyString())")
         
 		let plane = Plane(anchor, showDebugVisuals)
-		
+  
 		planes[anchor] = plane
 		node.addChildNode(plane)
-		
 		textManager.cancelScheduledMessage(forType: .planeEstimation)
 		textManager.showMessage("SURFACE DETECTED")
 		if virtualObject == nil {
@@ -777,6 +773,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
 			self.restartPlaneDetection()
 			
 			self.restartExperienceButton.setImage(#imageLiteral(resourceName: "restart"), for: [])
+            
+            self.MusicTreeNode.stop()
 			
 			// Disable Restart button for five seconds in order to give the session enough time to restart.
 			DispatchQueue.main.asyncAfter(deadline: .now() + 5.0, execute: {
@@ -826,15 +824,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
     
     // MARK: - Recording
     
+    @IBOutlet weak var CameraHitArea: UIButton!
     var recordTimer:Timer!
-    //var recordImageList: Array<UIImage> = Array()
     var recordImageList: [UIImage] = []
     
     var isRecordStart: Bool = false;
     
     func CameraBtnLongPress(recognizer:UILongPressGestureRecognizer) {
         
-        if recognizer.state == .began {
+        let p = recognizer.location(in: self.sceneView)
+        let view = self.sceneView.frame
+        if recognizer.state == .began && p.x < 64 && p.y > view.height-64{
             startRecording()
         }
         
@@ -904,6 +904,25 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
             self.present(alertView, animated: true, completion: nil)
             
         }
+    }
+    
+    // MARK: - Fantacy
+    
+    @IBOutlet weak var FantacyButton: UIButton!
+    @IBOutlet weak var FantacyView: UIStackView!
+    
+    func setupTable(){
+        FantacyView.layer.masksToBounds = true
+        FantacyView.layer.cornerRadius = 30
+        
+        FantacyView.subviews.forEach{ fantacyButton in
+            fantacyButton.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor.black, thickness: 0.5)
+        }
+    }
+    
+    @IBAction func showFantacy(_ button: UIButton) {
+        FantacyView.isHidden = !FantacyView.isHidden;
+        
     }
     
     // MARK: - Settings
@@ -982,20 +1001,23 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
     @IBAction func didTapScreen(_ sender: Any) {
         // fire bullet
         let bulletsNode = Bullet()
-        bulletsNode.position = SCNVector3(0, 0, -0.2) // SceneKit/AR coordinates are in meters
         
-        let bulletDirection = self.getUserDirection()
-        bulletsNode.physicsBody?.applyForce(bulletDirection, asImpulse: true)
+        let (direction, position) = self.getUserVector()
+        bulletsNode.position = position // SceneKit/AR coordinates are in meters
+        bulletsNode.physicsBody?.applyForce(direction, asImpulse: true)
         sceneView.scene.rootNode.addChildNode(bulletsNode)
     }
     
     
-    func getUserDirection() -> SCNVector3 {
+    func getUserVector() -> (SCNVector3, SCNVector3) { // (direction, position)
         if let frame = self.sceneView.session.currentFrame {
-            let mat = SCNMatrix4FromMat4(frame.camera.transform)
-            return SCNVector3(-1 * mat.m31, -1 * mat.m32, -1 * mat.m33)
+            let mat = SCNMatrix4FromMat4(frame.camera.transform) // 4x4 transform matrix describing camera in world space
+            let dir = SCNVector3(-1 * mat.m31, -1 * mat.m32, -1 * mat.m33) // orientation of camera in world space
+            let pos = SCNVector3(mat.m41, mat.m42, mat.m43) // location of camera in world space
+            
+            return (dir, pos)
         }
-        return SCNVector3(0, 0, -1)
+        return (SCNVector3(0, 0, -1), SCNVector3(0, 0, -0.2))
     }
     
     func addNewBalloon() {
@@ -1026,6 +1048,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
     
     @IBOutlet weak var CubeButton: UIButton!
     @IBAction func clickCubeButton(_ sender: Any) {
+        
+        
         guard CubeButton.isEnabled else {
             return
         }
@@ -1044,24 +1068,43 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
     
     
     var showMusicTree: Bool = false
-    var MusicTreeNode: MusicTree?
+    var MusicTreeNode: MusicTree = MusicTree()
+    var lastPlaneNode: SCNNode?
+    var lastPlaneAnchor: ARPlaneAnchor?
     
     @IBOutlet weak var musicTreeButton: UIButton!
     
     @IBAction func clickMusicTreeButton(_ sender: Any) {
+        FantacyView.isHidden = true
         guard musicTreeButton.isEnabled else {
             return
         }
+        
+        DispatchQueue.main.async {
+            // Immediately place the object in 3D space.
+            
+            if let anchor = self.lastPlaneAnchor, let node = self.lastPlaneNode {
+                self.MusicTreeNode.position = SCNVector3Make(anchor.center.x, 0, anchor.center.z)
+                node.addChildNode(self.MusicTreeNode)
+            }
+            else{
+                self.MusicTreeNode.position = SCNVector3Make(-0.2,-0.4,-0.5)
+                self.sceneView.scene.rootNode.addChildNode(self.MusicTreeNode)
+            }
+            
+        }
+        
+        //currentPlane.addChildNode(self.MusicTreeNode)
         if showMusicTree {
-            MusicTreeNode!.stop()
+            
+            self.MusicTreeNode.stop()
             showMusicTree = false
         }
         else{
-            if let node = MusicTreeNode{
-                node.play()
-                showMusicTree = true
-            }
+            self.MusicTreeNode.play()
+            showMusicTree = true
         }
+        
     }
     
 }
