@@ -27,8 +27,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
         setupTable()
 		updateSettings()
 		resetVirtualObject()
-        setupTapInsertPyramid()
-        //TapInsertDomino()
+        //setupTapInsertPyramid()
+        TapInsertDomino()
         setupRecognizers()//should include all gestures
         
         // set Recording button long press
@@ -1197,16 +1197,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
     
     //a force to push domino
     func PushDomino(_ recognizer: UILongPressGestureRecognizer ){
-        print("in")
         let tapPoint:CGPoint = recognizer.location(in: recognizer.view)
         let result  = self.sceneView.hitTest(tapPoint, options: nil)//find which domino
         for thing in result {
+            let type:SCNNode = thing.node.parent!
             
-            if(thing.isMember(of: Domino.self) ) {
-                print("Yes")
+            if( type.isMember(of: Domino.self) ) {
                 let (direction, _) = self.getUserVector()
-                
-                thing.node.physicsBody?.applyForce(direction*10, asImpulse: true)
+                thing.node.physicsBody?.applyForce(direction*2, asImpulse: true)
                 return
             }
         }

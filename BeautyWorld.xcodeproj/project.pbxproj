@@ -32,8 +32,8 @@
 		FE71DA441F015A230040C696 /* Bullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE71DA431F015A230040C696 /* Bullet.swift */; };
 		FE71DA461F015A2E0040C696 /* Balloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE71DA451F015A2E0040C696 /* Balloon.swift */; };
 		FE7323D61F01CEA60018A77D /* MusicTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7323D51F01CEA60018A77D /* MusicTree.swift */; };
-		FECA04771F02C337007AD8E8 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE078BED1F029A9E007BCF8A /* AudioKit.framework */; };
-		FECA04781F02C337007AD8E8 /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FE078BED1F029A9E007BCF8A /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FEEBC2D61F135C5E00CC18CD /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEEBC2D51F135C1C00CC18CD /* AudioKit.framework */; };
+		FEEBC2D71F135C5E00CC18CD /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FEEBC2D51F135C1C00CC18CD /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FEF39E5A1F1337C1006A9AA4 /* Domino.m in Sources */ = {isa = PBXBuildFile; fileRef = FEF39E541F133769006A9AA4 /* Domino.m */; };
 		FEF39E5B1F1337C1006A9AA4 /* PBRMaterial.m in Sources */ = {isa = PBXBuildFile; fileRef = FEF39E551F133769006A9AA4 /* PBRMaterial.m */; };
 		FEF39E5C1F1337C1006A9AA4 /* Plane.m in Sources */ = {isa = PBXBuildFile; fileRef = FEF39E561F133769006A9AA4 /* Plane.m */; };
@@ -41,14 +41,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		FE078BEC1F029A9E007BCF8A /* PBXContainerItemProxy */ = {
+		FEEBC2D41F135C1C00CC18CD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FE078BE81F029A9C007BCF8A /* AudioKit For iOS.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = C42F35001C057E03000E937C;
 			remoteInfo = AudioKit;
 		};
-		FECA04791F02C337007AD8E8 /* PBXContainerItemProxy */ = {
+		FEEBC2D81F135C5E00CC18CD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FE078BE81F029A9C007BCF8A /* AudioKit For iOS.xcodeproj */;
 			proxyType = 1;
@@ -64,7 +64,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				FECA04781F02C337007AD8E8 /* AudioKit.framework in Embed Frameworks */,
+				FEEBC2D71F135C5E00CC18CD /* AudioKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -99,7 +99,7 @@
 		C7F76951F8992F473202F831 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		FE078BE11F024982007BCF8A /* ImageToVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageToVideo.swift; sourceTree = "<group>"; };
 		FE078BE41F026D23007BCF8A /* Sample.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Sample.mp3; sourceTree = "<group>"; };
-		FE078BE81F029A9C007BCF8A /* AudioKit For iOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "AudioKit For iOS.xcodeproj"; path = "../../AudioKit-3.5/AudioKit/iOS/AudioKit For iOS.xcodeproj"; sourceTree = "<group>"; };
+		FE078BE81F029A9C007BCF8A /* AudioKit For iOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "AudioKit For iOS.xcodeproj"; path = "../AudioKit-3.5/AudioKit/iOS/AudioKit For iOS.xcodeproj"; sourceTree = "<group>"; };
 		FE71DA431F015A230040C696 /* Bullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bullet.swift; sourceTree = "<group>"; };
 		FE71DA451F015A2E0040C696 /* Balloon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Balloon.swift; sourceTree = "<group>"; };
 		FE7323D51F01CEA60018A77D /* MusicTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicTree.swift; sourceTree = "<group>"; };
@@ -120,7 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FECA04771F02C337007AD8E8 /* AudioKit.framework in Frameworks */,
+				FEEBC2D61F135C5E00CC18CD /* AudioKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,14 +226,6 @@
 			path = Music;
 			sourceTree = "<group>";
 		};
-		FE078BE91F029A9C007BCF8A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				FE078BED1F029A9E007BCF8A /* AudioKit.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		FE2B69D11F13580500EFE08A /* Domino */ = {
 			isa = PBXGroup;
 			children = (
@@ -271,6 +263,14 @@
 			path = MusicTree;
 			sourceTree = "<group>";
 		};
+		FEEBC2D11F135C1C00CC18CD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FEEBC2D51F135C1C00CC18CD /* AudioKit.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -286,7 +286,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				FECA047A1F02C337007AD8E8 /* PBXTargetDependency */,
+				FEEBC2D91F135C5E00CC18CD /* PBXTargetDependency */,
 			);
 			name = BeautyWorld;
 			productName = ARKitExample;
@@ -305,7 +305,7 @@
 				TargetAttributes = {
 					3929C4871E89EC2C00E00B60 = {
 						CreatedOnToolsVersion = 9.0;
-						DevelopmentTeam = LK7M67SSKJ;
+						DevelopmentTeam = DE2J4NN5W3;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
@@ -324,7 +324,7 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = FE078BE91F029A9C007BCF8A /* Products */;
+					ProductGroup = FEEBC2D11F135C1C00CC18CD /* Products */;
 					ProjectRef = FE078BE81F029A9C007BCF8A /* AudioKit For iOS.xcodeproj */;
 				},
 			);
@@ -336,11 +336,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		FE078BED1F029A9E007BCF8A /* AudioKit.framework */ = {
+		FEEBC2D51F135C1C00CC18CD /* AudioKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = AudioKit.framework;
-			remoteRef = FE078BEC1F029A9E007BCF8A /* PBXContainerItemProxy */;
+			remoteRef = FEEBC2D41F135C1C00CC18CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -395,10 +395,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		FECA047A1F02C337007AD8E8 /* PBXTargetDependency */ = {
+		FEEBC2D91F135C5E00CC18CD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = AudioKit;
-			targetProxy = FECA04791F02C337007AD8E8 /* PBXContainerItemProxy */;
+			targetProxy = FEEBC2D81F135C5E00CC18CD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -521,10 +521,10 @@
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = LK7M67SSKJ;
+				DEVELOPMENT_TEAM = DE2J4NN5W3;
 				INFOPLIST_FILE = "$(SRCROOT)/BeautyWorld/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.grooming.BeautyWorld;
+				PRODUCT_BUNDLE_IDENTIFIER = com.grooming.BeautyWorld2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "BeautyWorld/BeautyWorld-Bridging-Header.h";
@@ -544,10 +544,10 @@
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = LK7M67SSKJ;
+				DEVELOPMENT_TEAM = DE2J4NN5W3;
 				INFOPLIST_FILE = "$(SRCROOT)/BeautyWorld/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.grooming.BeautyWorld;
+				PRODUCT_BUNDLE_IDENTIFIER = com.grooming.BeautyWorld2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "BeautyWorld/BeautyWorld-Bridging-Header.h";

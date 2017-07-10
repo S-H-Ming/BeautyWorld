@@ -12,7 +12,7 @@ static int currentMaterialIndex = 0;
     self = [super init];
     
     float dimension = 0.1;
-    SCNBox *cube = [SCNBox boxWithWidth:dimension/2 height:dimension*2 length:dimension chamferRadius:0];
+    SCNBox *cube = [SCNBox boxWithWidth:dimension/3 height:dimension*2 length:dimension chamferRadius:0];
     cube.materials = @[material];
     SCNNode *node = [SCNNode nodeWithGeometry:cube];
     
