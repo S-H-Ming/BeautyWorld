@@ -27,6 +27,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
         setupTable()
 		updateSettings()
 		resetVirtualObject()
+        setupTapInsertPyramid()
+        //TapInsertDomino()
+        setupRecognizers()//should include all gestures
         
         // set Recording button long press
         
@@ -523,7 +526,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
 	@IBOutlet weak var addObjectButton: UIButton!
 	
 	func loadVirtualObject(at index: Int) {
-		resetVirtualObject()
+		//resetVirtualObject()
 		
 		// Show progress indicator
 		let spinner = UIActivityIndicatorView()
@@ -1120,6 +1123,104 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
     
     func longPressMusictreePlane(recognizer:UILongPressGestureRecognizer) {
         print("LongPress Plane")
+    }
+    
+    /////Pyramid dropping/////
+    
+    
+    var pyramids = [Pyramid]()
+    func insertPyramid( hitResult :ARHitTestResult ){
+        
+        let insertionYOffset:Float  = 0.3; // the height of pyramid input
+        let position : SCNVector3 = SCNVector3Make(
+            hitResult.worldTransform.columns.3.x ,
+            hitResult.worldTransform.columns.3.y + insertionYOffset,
+            hitResult.worldTransform.columns.3.z )
+        let pyramid = Pyramid.init(atPosition: position, with: Pyramid.currentMaterial())
+        pyramids.append( pyramid!) //record pyramids
+        self.sceneView.scene.rootNode.addChildNode(pyramid!)
+    }
+    
+    func InsertPyramidFrom(_ recognizer: UITapGestureRecognizer) {
+        print("Tap Screen!")
+        let tapPoint:CGPoint = recognizer.location(in: recognizer.view)
+        let result  = self.sceneView.hitTest(tapPoint, types:.existingPlaneUsingExtent)
+        if result.count == 0{//the point has no planes
+            return
+        }
+        
+        let first :ARHitTestResult = result.first!
+        self.insertPyramid(hitResult: first)
+        
+    }
+    
+        func setupTapInsertPyramid(){
+            let finger = UITapGestureRecognizer(target:self,action: #selector(self.InsertPyramidFrom(_:) ))
+            finger.numberOfTapsRequired = 1
+            self.sceneView.addGestureRecognizer(finger)
+        }
+    
+    //remove if the pyramid on the bottom
+    
+    /////////Domino//////////
+    var dominos = [Domino]()
+    func insertDomino( hitResult :ARHitTestResult ){
+        let insertionYOffset:Float  = 0;
+        
+        let position : SCNVector3 = SCNVector3Make(
+            hitResult.worldTransform.columns.3.x ,
+            hitResult.worldTransform.columns.3.y + insertionYOffset,
+            hitResult.worldTransform.columns.3.z )
+        let domino = Domino.init(atPosition: position, with: Domino.currentMaterial())
+        dominos.append( domino!) //record dominos
+        self.sceneView.scene.rootNode.addChildNode(domino!)
+        
+    }
+    
+    func InsertDominoFrom(_ recognizer: UITapGestureRecognizer) {
+        let tapPoint:CGPoint = recognizer.location(in: recognizer.view)
+        let result  = self.sceneView.hitTest(tapPoint, types:.existingPlaneUsingExtent)
+        if result.count == 0{//the point has no planes
+            return
+        }
+        
+        let first :ARHitTestResult = result.first!
+        self.insertDomino(hitResult: first)
+        
+    }
+    
+    func TapInsertDomino(){
+        let finger = UITapGestureRecognizer(target:self,action: #selector(self.InsertDominoFrom(_:) ))
+        finger.numberOfTapsRequired = 1
+        self.sceneView.addGestureRecognizer(finger)
+    }
+    
+    //a force to push domino
+    func PushDomino(_ recognizer: UILongPressGestureRecognizer ){
+        print("in")
+        let tapPoint:CGPoint = recognizer.location(in: recognizer.view)
+        let result  = self.sceneView.hitTest(tapPoint, options: nil)//find which domino
+        for thing in result {
+            
+            if(thing.isMember(of: Domino.self) ) {
+                print("Yes")
+                let (direction, _) = self.getUserVector()
+                
+                thing.node.physicsBody?.applyForce(direction*10, asImpulse: true)
+                return
+            }
+        }
+        
+    }
+    ////////////////////////////
+    
+    //////Gesture//////
+    func setupRecognizers(){
+        let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(ViewController.PushDomino(_:)))
+        lpgr.minimumPressDuration = 0.5
+        lpgr.delaysTouchesBegan = true
+        self.view.addGestureRecognizer(lpgr)
+        
     }
     
 }
