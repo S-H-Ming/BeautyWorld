@@ -1125,7 +1125,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
         print("LongPress Plane")
     }
     
-    /////Pyramid dropping/////
+    //  -------------- Pyramid Dropping --------------
     
     
     var pyramids = [Pyramid]()
@@ -1144,7 +1144,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
     func InsertPyramidFrom(_ recognizer: UITapGestureRecognizer) {
         print("Tap Screen!")
         let tapPoint:CGPoint = recognizer.location(in: recognizer.view)
-        let result  = self.sceneView.hitTest(tapPoint, types:.existingPlaneUsingExtent)
+        let result = self.sceneView.hitTest(tapPoint, types:.existingPlaneUsingExtent)
         if result.count == 0{//the point has no planes
             return
         }
@@ -1162,7 +1162,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
     
     //remove if the pyramid on the bottom
     
-    /////////Domino//////////
+    //  -------------- Domino --------------
     var dominos = [Domino]()
     func insertDomino( hitResult :ARHitTestResult ){
         let insertionYOffset:Float  = 0;
