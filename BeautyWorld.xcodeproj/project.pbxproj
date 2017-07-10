@@ -130,6 +130,10 @@
 		113B64D01ECA81CA0071CBD1 /* UI Elements */ = {
 			isa = PBXGroup;
 			children = (
+				FEF39E551F133769006A9AA4 /* PBRMaterial.m */,
+				FEF39E5E1F13387F006A9AA4 /* PBRMaterial.h */,
+				FEF39E561F133769006A9AA4 /* Plane.m */,
+				FEF39E5F1F13387F006A9AA4 /* Plane.h */,
 				C42A71BC1E9C0AF200944367 /* FocusSquare.swift */,
 				3987BEDB1E9E057F00167FAC /* Gesture.swift */,
 				39C0B9501E9C63CB003FCA0C /* HitTestVisualization.swift */,
@@ -160,18 +164,12 @@
 		3929C48A1E89EC2C00E00B60 /* BeautyWorld */ = {
 			isa = PBXGroup;
 			children = (
+				FE2B69D21F13582E00EFE08A /* Pyramid */,
+				FE2B69D11F13580500EFE08A /* Domino */,
 				3929C48B1E89EC2C00E00B60 /* AppDelegate.swift */,
 				3929C48D1E89EC2C00E00B60 /* ViewController.swift */,
 				FEF39E581F133769006A9AA4 /* BeautyWorld-Bridging-Header.h */,
 				FEF39E531F133769006A9AA4 /* CollisionCategory.h */,
-				FEF39E521F133769006A9AA4 /* Domino.h */,
-				FEF39E541F133769006A9AA4 /* Domino.m */,
-				FEF39E551F133769006A9AA4 /* PBRMaterial.m */,
-				FEF39E5E1F13387F006A9AA4 /* PBRMaterial.h */,
-				FEF39E561F133769006A9AA4 /* Plane.m */,
-				FEF39E5F1F13387F006A9AA4 /* Plane.h */,
-				FEF39E591F133769006A9AA4 /* Pyramid.h */,
-				FEF39E571F133769006A9AA4 /* Pyramid.m */,
 				FE71DA401F0155F30040C696 /* BalloonShooting */,
 				FE7323D41F01CE630018A77D /* MusicTree */,
 				C40DF57B1EC2330700D9D59E /* Virtual Objects */,
@@ -234,6 +232,24 @@
 				FE078BED1F029A9E007BCF8A /* AudioKit.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		FE2B69D11F13580500EFE08A /* Domino */ = {
+			isa = PBXGroup;
+			children = (
+				FEF39E521F133769006A9AA4 /* Domino.h */,
+				FEF39E541F133769006A9AA4 /* Domino.m */,
+			);
+			path = Domino;
+			sourceTree = "<group>";
+		};
+		FE2B69D21F13582E00EFE08A /* Pyramid */ = {
+			isa = PBXGroup;
+			children = (
+				FEF39E591F133769006A9AA4 /* Pyramid.h */,
+				FEF39E571F133769006A9AA4 /* Pyramid.m */,
+			);
+			path = Pyramid;
 			sourceTree = "<group>";
 		};
 		FE71DA401F0155F30040C696 /* BalloonShooting */ = {
