@@ -32,11 +32,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
         
         let longPress = UILongPressGestureRecognizer(
             target: self,
-            action: #selector(ViewController.CameraBtnLongPress(recognizer:))
+            action: #selector(ViewController.ScreenLongPress(recognizer:))
         )
         self.view.addGestureRecognizer(longPress)
-        
-        //self.addNewBalloon()
         
     }
 
@@ -126,13 +124,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
 				self.addPlane(node: node, anchor: planeAnchor)
                 self.checkIfObjectShouldMoveOntoPlane(anchor: planeAnchor)
                 
-                // SCNPlanes are vertically oriented in their local coordinate space
-                //self.MusicTreeNode!.position = SCNVector3Make(planeAnchor.center.x, 0, planeAnchor.center.z)
                 self.lastPlaneNode = node
                 self.lastPlaneAnchor = planeAnchor
-                // ARKit owns the node corresponding to the anchor, so make the plane a child node.
-                //node.insertChildNode(self.MusicTreeNode!, at: 0)
-                //print(self.MusicTreeNode!.position)
+                
                 if self.showLoadModel{
                     let subScene = SCNScene(named: "Models.scnassets/test/cube.dae")!
                     let childNodes = subScene.rootNode.childNodes
@@ -606,10 +600,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
 		let pos = SCNVector3.positionFromTransform(anchor.transform)
 		textManager.showDebugMessage("NEW SURFACE DETECTED AT \(pos.friendlyString())")
         
-		let plane = Plane(anchor, showDebugVisuals)
+        let plane = Plane.init(anchor: anchor, isHidden: showDebugVisuals, with: Plane.currentMaterial() )
   
 		planes[anchor] = plane
-		node.addChildNode(plane)
+        node.addChildNode(plane!)
 		textManager.cancelScheduledMessage(forType: .planeEstimation)
 		textManager.showMessage("SURFACE DETECTED")
 		if virtualObject == nil {
@@ -714,7 +708,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
 			featurePointCountLabel.isHidden = !showDebugVisuals
 			debugMessageLabel.isHidden = !showDebugVisuals
 			messagePanel.isHidden = !showDebugVisuals
-			planes.values.forEach { $0.showDebugVisualization(showDebugVisuals) }
+			//planes.values.forEach { $0.showDebugVisualization(showDebugVisuals) }
 			
 			if showDebugVisuals {
 				sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
@@ -830,7 +824,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
     
     var isRecordStart: Bool = false;
     
-    func CameraBtnLongPress(recognizer:UILongPressGestureRecognizer) {
+    func ScreenLongPress(recognizer:UILongPressGestureRecognizer) {
+        
+        print(recognizer)
         
         let p = recognizer.location(in: self.sceneView)
         let view = self.sceneView.frame
@@ -965,7 +961,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
 		use3DOFTracking	= defaults.bool(for: .use3DOFTracking)
 		use3DOFTrackingFallback = defaults.bool(for: .use3DOFFallback)
 		for (_, plane) in planes {
-			plane.updateOcclusionSetting()
+		//	plane.updateOcclusionSetting()
 		}
 	}
 
@@ -998,6 +994,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
     
     //  --------------Balloon Shooting--------------
     
+    @IBOutlet weak var BalloonShootingBtn: UIButton!
+    @IBAction func clickBalloonShootingBtn(_ sender: Any) {
+        FantacyView.isHidden = true
+        self.addNewBalloon()
+    }
+    
+    
     @IBAction func didTapScreen(_ sender: Any) {
         // fire bullet
         let bulletsNode = Bullet()
@@ -1026,7 +1029,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
         let posX = floatBetween(-0.5, and: 0.5)
         let posY = floatBetween(-0.5, and: 0.5  )
         cubeNode.position = SCNVector3(posX, posY, -1) // SceneKit/AR coordinates are in meters
-        sceneView.scene.rootNode.addChildNode(cubeNode)
+        if let lastPlane = lastPlaneNode{
+            lastPlane.addChildNode(cubeNode)
+        }
+        else{
+            self.sceneView.scene.rootNode.addChildNode(cubeNode)
+        }
     }
     
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
@@ -1034,7 +1042,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
         contact.nodeA.removeFromParentNode()
         contact.nodeB.removeFromParentNode()
         print("Hit Balloon!")
-        self.addNewBalloon()
         
     }
     
@@ -1084,12 +1091,16 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
             // Immediately place the object in 3D space.
             
             if let anchor = self.lastPlaneAnchor, let node = self.lastPlaneNode {
+                
                 self.MusicTreeNode.position = SCNVector3Make(anchor.center.x, 0, anchor.center.z)
                 node.addChildNode(self.MusicTreeNode)
+                
             }
             else{
+                
                 self.MusicTreeNode.position = SCNVector3Make(-0.2,-0.4,-0.5)
                 self.sceneView.scene.rootNode.addChildNode(self.MusicTreeNode)
+                
             }
             
         }
@@ -1105,6 +1116,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIPopoverPresentation
             showMusicTree = true
         }
         
+    }
+    
+    func longPressMusictreePlane(recognizer:UILongPressGestureRecognizer) {
+        print("LongPress Plane")
     }
     
 }

@@ -49,13 +49,14 @@ class MusicTree: SCNNode {
     
     func play(){
         
-        musicPlayer.play(from:0.0, to:10.0)
+        musicPlayer.play()
         trackedAmplitude.start()
         AKPlaygroundLoop(every: 1) {
             //print(fft.fftData.count)
             self.amplitude = (Float)(self.trackedAmplitude.amplitude)
-            self.transformWithMusic()
-            //print(self.position)
+            //if self.amplitude > 0.5{
+                self.transformWithMusic()
+            //}
         }
         
         
@@ -119,10 +120,13 @@ class branchNode: SCNNode{
         let color = UIColor(colorLiteralRed: 0.2, green: 0.8, blue: Float(random(0.5, 0.9)), alpha: 0.8)
         box?.firstMaterial?.diffuse.contents = color
         self.geometry = box
-        //self.rotation = SCNVector4(1,1,0,random(-0.3*3.14, 0.3*3.14))
-        self.position = bottomPosition + SCNVector3(0,0,height/2)
-        self.topPosition = bottomPosition + SCNVector3(0,0,height)
+        let angle = random(-120, 120)
+        self.rotation = SCNVector4(1,0,0,angle * 0.017453) // degree to radian
+        let distanceFromTopToBottom = abs(height * CGFloat(cos(angle)))
+        //let xbias = height * sin(angle)
         
+        self.position = bottomPosition + SCNVector3(0,distanceFromTopToBottom / 2,0)
+        self.topPosition = bottomPosition + SCNVector3(0,distanceFromTopToBottom,0)
     }
     
     required init?(coder aDecoder: NSCoder) {

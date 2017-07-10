@@ -219,6 +219,9 @@
                                         <state key="normal" title="氣球射擊">
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="clickBalloonShootingBtn:" destination="BV1-FR-VrT" eventType="touchUpInside" id="9Bl-nw-2FW"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mxu-fR-TiW" userLabel="MusicTree Button">
                                         <rect key="frame" x="0.0" y="50" width="150" height="50"/>

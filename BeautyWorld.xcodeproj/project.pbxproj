@@ -12,7 +12,6 @@
 		3929C4911E89EC2C00E00B60 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3929C48F1E89EC2C00E00B60 /* Main.storyboard */; };
 		3929C4931E89EC2C00E00B60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3929C4921E89EC2C00E00B60 /* Assets.xcassets */; };
 		3929C49F1E89EE4400E00B60 /* Models.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 3929C49E1E89EE4400E00B60 /* Models.scnassets */; };
-		392BB82C1EA19A7C00FBBAC8 /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392BB82B1EA19A7C00FBBAC8 /* Plane.swift */; };
 		3987BEDC1E9E057F00167FAC /* Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3987BEDB1E9E057F00167FAC /* Gesture.swift */; };
 		39C0B9511E9C63CB003FCA0C /* HitTestVisualization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C0B9501E9C63CB003FCA0C /* HitTestVisualization.swift */; };
 		39C0B9591E9C6B1F003FCA0C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C0B9571E9C6B1F003FCA0C /* SettingsViewController.swift */; };
@@ -36,6 +35,10 @@
 		FE7323D61F01CEA60018A77D /* MusicTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7323D51F01CEA60018A77D /* MusicTree.swift */; };
 		FECA04771F02C337007AD8E8 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE078BED1F029A9E007BCF8A /* AudioKit.framework */; };
 		FECA04781F02C337007AD8E8 /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FE078BED1F029A9E007BCF8A /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FEF39E4B1F118EA9006A9AA4 /* Plane.m in Sources */ = {isa = PBXBuildFile; fileRef = FEF39E4A1F118EA9006A9AA4 /* Plane.m */; };
+		FEF39E4D1F118EE4006A9AA4 /* Plane.h in Sources */ = {isa = PBXBuildFile; fileRef = FEF39E4C1F118EC9006A9AA4 /* Plane.h */; };
+		FEF39E501F118FC7006A9AA4 /* PBRMaterial.m in Sources */ = {isa = PBXBuildFile; fileRef = FEF39E4F1F118FC7006A9AA4 /* PBRMaterial.m */; };
+		FEF39E511F11900E006A9AA4 /* PBRMaterial.h in Sources */ = {isa = PBXBuildFile; fileRef = FEF39E4E1F118F91006A9AA4 /* PBRMaterial.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,7 +82,6 @@
 		3929C4921E89EC2C00E00B60 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3929C4971E89EC2C00E00B60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3929C49E1E89EE4400E00B60 /* Models.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Models.scnassets; sourceTree = "<group>"; };
-		392BB82B1EA19A7C00FBBAC8 /* Plane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
 		3987BEDB1E9E057F00167FAC /* Gesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gesture.swift; sourceTree = "<group>"; };
 		39C0B9501E9C63CB003FCA0C /* HitTestVisualization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HitTestVisualization.swift; sourceTree = "<group>"; };
 		39C0B9571E9C6B1F003FCA0C /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +105,11 @@
 		FE71DA431F015A230040C696 /* Bullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bullet.swift; sourceTree = "<group>"; };
 		FE71DA451F015A2E0040C696 /* Balloon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Balloon.swift; sourceTree = "<group>"; };
 		FE7323D51F01CEA60018A77D /* MusicTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicTree.swift; sourceTree = "<group>"; };
+		FEF39E491F118EA9006A9AA4 /* BeautyWorld-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BeautyWorld-Bridging-Header.h"; sourceTree = "<group>"; };
+		FEF39E4A1F118EA9006A9AA4 /* Plane.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Plane.m; sourceTree = "<group>"; };
+		FEF39E4C1F118EC9006A9AA4 /* Plane.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Plane.h; sourceTree = "<group>"; };
+		FEF39E4E1F118F91006A9AA4 /* PBRMaterial.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PBRMaterial.h; sourceTree = "<group>"; };
+		FEF39E4F1F118FC7006A9AA4 /* PBRMaterial.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PBRMaterial.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,9 +129,13 @@
 			children = (
 				C42A71BC1E9C0AF200944367 /* FocusSquare.swift */,
 				3987BEDB1E9E057F00167FAC /* Gesture.swift */,
-				392BB82B1EA19A7C00FBBAC8 /* Plane.swift */,
 				39D4A8BD1EA1AF530006EC65 /* PlaneDebugVisualization.swift */,
 				39C0B9501E9C63CB003FCA0C /* HitTestVisualization.swift */,
+				FEF39E4A1F118EA9006A9AA4 /* Plane.m */,
+				FEF39E4C1F118EC9006A9AA4 /* Plane.h */,
+				FEF39E491F118EA9006A9AA4 /* BeautyWorld-Bridging-Header.h */,
+				FEF39E4E1F118F91006A9AA4 /* PBRMaterial.h */,
+				FEF39E4F1F118FC7006A9AA4 /* PBRMaterial.m */,
 			);
 			path = "UI Elements";
 			sourceTree = "<group>";
@@ -331,18 +342,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEF39E511F11900E006A9AA4 /* PBRMaterial.h in Sources */,
+				FEF39E4D1F118EE4006A9AA4 /* Plane.h in Sources */,
 				39C0B9511E9C63CB003FCA0C /* HitTestVisualization.swift in Sources */,
 				FE71DA441F015A230040C696 /* Bullet.swift in Sources */,
 				FE078BE21F024982007BCF8A /* ImageToVideo.swift in Sources */,
 				C40FE52B1EC239F100732B01 /* Cup.swift in Sources */,
 				C40FE52A1EC239F100732B01 /* Chair.swift in Sources */,
 				3929C48E1E89EC2C00E00B60 /* ViewController.swift in Sources */,
+				FEF39E501F118FC7006A9AA4 /* PBRMaterial.m in Sources */,
 				FE7323D61F01CEA60018A77D /* MusicTree.swift in Sources */,
 				C41366B91EB80DD400EC054A /* TextManager.swift in Sources */,
+				FEF39E4B1F118EA9006A9AA4 /* Plane.m in Sources */,
 				39C0B95A1E9C6B1F003FCA0C /* Utilities.swift in Sources */,
 				FE71DA461F015A2E0040C696 /* Balloon.swift in Sources */,
 				C40FE52E1EC239F100732B01 /* Vase.swift in Sources */,
-				392BB82C1EA19A7C00FBBAC8 /* Plane.swift in Sources */,
 				3987BEDC1E9E057F00167FAC /* Gesture.swift in Sources */,
 				C4E87DD91EA6B40F002117D6 /* VirtualObject.swift in Sources */,
 				C40FE5291EC239F100732B01 /* Candle.swift in Sources */,
@@ -481,6 +495,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -490,6 +505,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.grooming.BeautyWorld;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "BeautyWorld/UI Elements/BeautyWorld-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 3.0;
 			};
@@ -501,6 +518,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -510,6 +528,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.grooming.BeautyWorld;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "BeautyWorld/UI Elements/BeautyWorld-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 3.0;
 			};
